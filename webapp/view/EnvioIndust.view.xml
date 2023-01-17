@@ -1,0 +1,755 @@
+<mvc:View controllerName="br.com.arcelor.zbmmm0009.controller.EnvioIndust"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:m="sap.m"
+  xmlns:t="sap.ui.table"
+  xmlns:core="sap.ui.core"
+  xmlns:form="sap.ui.layout.form"
+  xmlns:layout="sap.ui.layout">
+
+  <ObjectPageLayout xmlns="sap.uxap" id="page" upperCaseAnchorBar="false" flexEnabled="true" preserveHeaderStateOnScroll="true" showFooter="true" showHeaderContent="true" busyIndicatorDelay="0" useIconTabBar="true">
+
+    <headerTitle>
+      <ObjectPageHeader id="header" objectTitle="{i18n>EnvioIndust}" showTitleSelector="false">
+      </ObjectPageHeader>
+    </headerTitle>
+
+    <sections>
+
+      <!--
+        ************ MANUAL ************
+      -->
+      <ObjectPageSection titleUppercase="false" id="pageSectionManual" title="{i18n>lblEnvioManual}">
+        <ObjectPageSubSection id="sectionManualHeader" title="{i18n>lblData}" titleUppercase="false">
+          <blocks>
+            <m:VBox class="sapUiSmallMargin">
+              <form:SimpleForm layout="ResponsiveGridLayout" width="70%">
+                <core:Title text="Informar Dados"/>
+                <Label xmlns="sap.m" text="Centro" id="lblCentro"/>
+                <Select id="inWerks" change=".onChangeCentro" forceSelection="false"
+                  xmlns="sap.m" showSecondaryValues="true" wrapItemsText="true" width="47%" selectedKey="{ItensIndust_JSONModel>/Werks}" items="{path:'/ShPlantSet', templateShareable:true}">
+                  <core:ListItem key="{Plant}" text="{Plant} - {Name1}" />
+                </Select>
+                <Label xmlns="sap.m" text="Fornecedor" id="lblFornecedor"/>
+                <m:Input id="inLifnr" width="95%" placeholder="Selecionar Fornecedor" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onValueHelpRequestLifnr" suggestionItems="{
+										path: '/ShFornecedorSet',
+										sorter: { path: 'Name1' } }">
+                  <core:Item key="{Fornecedor}" text="{Name1} ({Fornecedor})" />
+                </m:Input>
+                <Text xmlns="sap.m" id="lblDescFornecedor" width="100%"/>
+              </form:SimpleForm>
+            </m:VBox>
+          </blocks>
+        </ObjectPageSubSection>
+        <ObjectPageSubSection id="sectionManualItems" title="{i18n>lblItems}" titleUppercase="false">
+          <blocks>
+            <t:Table id="ItensEnvIndustTable" rows="{ path: 'ItensIndust_JSONModel>/Itens' }" selectionMode="MultiToggle" fixedColumnCount="1" visibleRowCountMode="Auto" minAutoRowCount="10">
+              <t:extension>
+                <OverflowToolbar xmlns="sap.m" id="toolbar1" width="100%">
+                  <ToolbarSpacer id="spacer0"/>
+                  <m:Button id="btnNovo" text="Novo" type="Transparent" icon="sap-icon://write-new-document" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onNovo"/>
+                  <m:Button id="btnDel" text="Eliminar" type="Transparent" icon="sap-icon://delete" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onDel"/>
+                </OverflowToolbar>
+              </t:extension>
+              <t:columns>
+                <t:Column id="column1" width="50px">
+                  <Label xmlns="sap.m" text="Item" id="label1"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{ItensIndust_JSONModel>Item}" wrapping="false" />
+                  </t:template>
+                </t:Column>
+                <t:Column id="column2" width="200px">
+                  <Label xmlns="sap.m" text="Material" id="label2"/>
+                  <t:template>
+                    <Input id="productInput"
+                      xmlns="sap.m" value="{ItensIndust_JSONModel>Matnr}" placeholder="Selecionar Material" showSuggestion="true" showValueHelp="true" change=".onvhMatnrChange" valueHelpRequest=".onValueHelpRequest">
+                    </Input>
+                  </t:template>
+                </t:Column>
+                <t:Column id="column3" width="310px">
+                  <Label xmlns="sap.m" text="Descrição Material" id="label3"/>
+                  <t:template>
+                    <Text xmlns="sap.m" id="txtMaktx" text="{ItensIndust_JSONModel>Maktx}" width="300px" />
+                  </t:template>
+                </t:Column>
+                <t:Column id="column4" width="120px">
+                  <Label xmlns="sap.m" text="Depósito" id="label4"/>
+                  <t:template>
+                    <Input id="inLgort"
+                      xmlns="sap.m" value="{ItensIndust_JSONModel>Lgort}" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequestLgort">
+                    </Input>
+                  </t:template>
+                </t:Column>
+                <t:Column id="column5" width="100px">
+                  <Label xmlns="sap.m" text="Qtde Saída" id="label5"/>
+                  <t:template>
+                    <!--<Input xmlns="sap.m" value="{path:'ItensIndust_JSONModel>Menge' }" type="Number" required="true" />-->
+                    <Input xmlns="sap.m" value="{path: 'ItensIndust_JSONModel>Menge', type:'sap.ui.model.type.Float', formatOptions:{minFractionDigits:3,maxFractionDigits:3}, constraints:{precision:13,scale:3}}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column id="column6" width="150px">
+                  <Label xmlns="sap.m" text="Lote" id="label6"/>
+                  <t:template>
+                    <Input id="inCharg"
+                      xmlns="sap.m" value="{ItensIndust_JSONModel>Charg}" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequestCharg">
+                    </Input>
+                  </t:template>
+                </t:Column>
+                <t:Column width="70px">
+                  <Label xmlns="sap.m" text="UM básica"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{ItensIndust_JSONModel>Meins}" />
+                  </t:template>
+                </t:Column>
+                <t:Column id="column8" width="150px">
+                  <Label xmlns="sap.m" text="Pedido" id="label8"/>
+                  <t:template>
+                    <Input xmlns="sap.m" maxLength="10" value="{ItensIndust_JSONModel>Ebeln}" change=".onChangePedidoItem"/>
+                  </t:template>
+                </t:Column>
+                <t:Column id="column9" width="100px">
+                  <Label xmlns="sap.m" text="Item Pedido" id="label9"/>
+                  <t:template>
+                    <Input xmlns="sap.m" maxLength="5" value="{ItensIndust_JSONModel>Ebelp}" change=".onChangePedidoItem" />
+                  </t:template>
+                </t:Column>
+                <t:Column width="200px">
+                  <Label xmlns="sap.m" text="Material acabado"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{ItensIndust_JSONModel>MaterialAcabado}" width="100px" />
+                  </t:template>
+                </t:Column>
+                <t:Column width="310px">
+                  <Label xmlns="sap.m" text="Descrição Material acabado" />
+                  <t:template>
+                    <Text xmlns="sap.m" text="{ItensIndust_JSONModel>MaterialAcabadoDesc}" width="300px" />
+                  </t:template>
+                </t:Column>
+              </t:columns>
+            </t:Table>
+          </blocks>
+        </ObjectPageSubSection>
+      </ObjectPageSection>
+
+      <!--
+        ************ PEDIDO ************
+      -->
+      <ObjectPageSection titleUppercase="false" id="pageSectionPedido" title="{i18n>lblEnvioPedido}">
+        <ObjectPageSubSection id="sectionPedidoHeader" title="{i18n>lblData}" titleUppercase="false">
+          <blocks>
+            <m:VBox class="sapUiSmallMargin">
+              <form:SimpleForm layout="ResponsiveGridLayout" width="70%">
+                <core:Title text="Informar Dados"/>
+                <m:Label text="{i18n>lblPedido}"/>
+                <m:Input id="fldPedidoSearch" width="200em" required="true" maxLength="10" value="{path: 'envioPedidoModel>/Pedido', type:'sap.ui.model.odata.type.String', constraints:{maxLength:10}}"/>
+                <Label xmlns="sap.m" text="Centro"/>
+                <Select id="inWerksPedido" forceSelection="false" editable="false"
+                  xmlns="sap.m" showSecondaryValues="true" wrapItemsText="true" width="47%" selectedKey="{envioPedidoModel>/Werks}" items="{path:'/ShPlantSet', templateShareable:true}">
+                  <core:ListItem key="{Plant}" text="{Plant} - {Name1}" />
+                </Select>
+                <Label xmlns="sap.m" text="Fornecedor"/>
+                <m:Input id="inLifnrPedido" width="95%" editable="false" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onValueHelpRequestLifnr" suggestionItems="{
+										path: '/ShFornecedorSet',
+										sorter: { path: 'Name1' } }">
+                  <core:Item key="{Fornecedor}" text="{Name1} ({Fornecedor})" />
+                </m:Input>
+                <Text xmlns="sap.m" id="lblDescFornecedorPedido" width="100%"/>
+              </form:SimpleForm>
+              <layout:HorizontalLayout class="sapUiContentPadding">
+                <m:Button type="Default" text="{i18n>btnAddItemsPedido}" icon="sap-icon://add-document" press="onSearchPedido" />
+              </layout:HorizontalLayout>
+            </m:VBox>
+          </blocks>
+        </ObjectPageSubSection>
+        <ObjectPageSubSection id="sectionPedidoItems" title="{i18n>lblItems}" titleUppercase="false">
+          <blocks>
+            <t:Table id="ItensPedidoTable" rows="{ path: 'envioPedidoModel>/Itens' }" selectionMode="MultiToggle" fixedColumnCount="2" visibleRowCountMode="Auto" minAutoRowCount="10">
+              <t:extension>
+                <OverflowToolbar xmlns="sap.m" width="100%">
+                  <ToolbarSpacer/>
+                  <m:Button id="btnParcel" text="{i18n>btnParcelItem}" type="Transparent" icon="sap-icon://split" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onParcelItem"/>
+                  <m:Button id="btnDelPedido" text="Eliminar" type="Transparent" icon="sap-icon://delete" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onDelPedido"/>
+                </OverflowToolbar>
+              </t:extension>
+              <t:columns>
+                <t:Column width="150px">
+                  <Label xmlns="sap.m" text="Pedido"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioPedidoModel>Pedido}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="100px">
+                  <Label xmlns="sap.m" text="Item Pedido"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioPedidoModel>Item}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="200px">
+                  <Label xmlns="sap.m" text="Material acabado"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioPedidoModel>MaterialAcab}" width="100px" />
+                  </t:template>
+                </t:Column>
+                <t:Column width="310px">
+                  <Label xmlns="sap.m" text="Descrição Material acabado" />
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioPedidoModel>MaterialAcabDesc}" width="300px" />
+                  </t:template>
+                </t:Column>
+                <t:Column width="200px">
+                  <Label xmlns="sap.m" text="Componente"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioPedidoModel>MaterialComp}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="310px">
+                  <Label xmlns="sap.m" text="Descrição componente"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioPedidoModel>MaterialCompDesc}" width="300px" />
+                  </t:template>
+                </t:Column>
+                <t:Column width="120px">
+                  <Label xmlns="sap.m" text="Depósito"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioPedidoModel>Deposito}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="100px">
+                  <Label xmlns="sap.m" text="Qtde pedido"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{ path: 'envioPedidoModel>QtdPedido', formatter: '.formatter.qtyValue' }"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="5em">
+                  <Label xmlns="sap.m" text="UM básica"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioPedidoModel>UmBasica}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="100px">
+                  <Label xmlns="sap.m" text="Qtde disponível"/>
+                  <t:template>
+                    <!--<Input xmlns="sap.m" id="fldQtdMatAcabadoManual" value="{ path: 'envioPedidoModel>QtdLote' }" type="Number"/>-->
+                    <Input xmlns="sap.m" id="fldQtdMatAcabadoManual" value="{path: 'envioPedidoModel>QtdLote', type:'sap.ui.model.type.Float', formatOptions:{minFractionDigits:3,maxFractionDigits:3}, constraints:{precision:13,scale:3}}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="150px">
+                  <Label xmlns="sap.m" text="Lote"/>
+                  <t:template>
+                    <Input id="inChargPedido"
+                      xmlns="sap.m" value="{envioPedidoModel>Lote}" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequestCharg">
+                    </Input>
+                  </t:template>
+                </t:Column>
+              </t:columns>
+            </t:Table>
+          </blocks>
+        </ObjectPageSubSection>
+      </ObjectPageSection>
+
+      <!--
+        ************ MATERIAL ************
+      -->
+      <ObjectPageSection titleUppercase="false" id="pageSectionMaterial" title="{i18n>lblEnvioMaterial}">
+        <ObjectPageSubSection id="sectionMaterialHeader" title="{i18n>lblData}" titleUppercase="false">
+          <blocks>
+            <m:VBox class="sapUiSmallMargin">
+              <form:SimpleForm layout="ResponsiveGridLayout" width="70%">
+                <core:Title text="Informar Dados"/>
+                <Label xmlns="sap.m" text="Centro"/>
+                <Select id="inWerksMaterial" change=".onChangeCentro" forceSelection="false"
+                  xmlns="sap.m" showSecondaryValues="true" wrapItemsText="true" width="47%" selectedKey="{envioMaterialModel>/Werks}" items="{path:'/ShPlantSet', templateShareable:true}">
+                  <core:ListItem key="{Plant}" text="{Plant} - {Name1}" />
+                </Select>
+                <Label xmlns="sap.m" text="Fornecedor"/>
+                <m:Input id="inLifnrMaterial" width="95%" placeholder="Selecionar Fornecedor" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onValueHelpRequestLifnr" suggestionItems="{
+										path: '/ShFornecedorSet',
+										sorter: { path: 'Name1' } }">
+                  <core:Item key="{Fornecedor}" text="{Name1} ({Fornecedor})" />
+                </m:Input>
+                <Text xmlns="sap.m" id="lblDescFornecedorMaterial" width="100%"/>
+                <m:Label text="{i18n>lblMaterial}"/>
+                <m:Input id="fldMaterialSearch" width="200em" required="true" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onValueHelpRequestMaterial" maxLength="18" value="{path: 'envioMaterialModel>/Material', type:'sap.ui.model.odata.type.String', constraints:{maxLength:18}}"/>
+                <m:Label text="{i18n>lblDeposito}"/>
+                <m:Input id="fldDepositoSearch" width="200em" required="false" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onVhForDeposito" maxLength="4" value="{path: 'envioMaterialModel>/Deposito', type:'sap.ui.model.odata.type.String', constraints:{maxLength:4}}"/>
+                <m:Label text="{i18n>lblLote}"/>
+                <m:Input id="fldLoteSearch" width="200em" required="false" maxLength="10" value="{path: 'envioMaterialModel>/Lote', type:'sap.ui.model.odata.type.String', constraints:{maxLength:10}}"/>
+
+              </form:SimpleForm>
+              <layout:HorizontalLayout class="sapUiContentPadding">
+                <m:Button type="Default" text="{i18n>btnAddItemsMaterial}" icon="sap-icon://add-document" press="onSearchMaterial" />
+              </layout:HorizontalLayout>
+            </m:VBox>
+          </blocks>
+        </ObjectPageSubSection>
+        <ObjectPageSubSection id="sectionMaterialItems" title="{i18n>lblItems}" titleUppercase="false">
+          <blocks>
+            <t:Table id="ItensMaterialTable" rows="{ path: 'envioMaterialModel>/Itens' }" selectionMode="MultiToggle" fixedColumnCount="1" visibleRowCountMode="Auto" minAutoRowCount="100">
+              <t:extension>
+                <OverflowToolbar xmlns="sap.m" width="100%">
+                  <ToolbarSpacer/>
+                  <m:Button id="btnDelMaterial" text="Eliminar" type="Transparent" icon="sap-icon://delete" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onDelMaterial"/>
+                </OverflowToolbar>
+              </t:extension>
+              <t:columns>
+                <t:Column width="75px">
+                  <Label xmlns="sap.m" text="Centro"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioMaterialModel>Centro}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="75px">
+                  <Label xmlns="sap.m" text="Depósito"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioMaterialModel>Deposito}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="200px">
+                  <Label xmlns="sap.m" text="Material"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioMaterialModel>Material}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="310px">
+                  <Label xmlns="sap.m" text="Descrição Material"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioMaterialModel>MaterialDesc}" width="300px" />
+                  </t:template>
+                </t:Column>
+                <t:Column width="100px">
+                  <Label xmlns="sap.m" text="Qtde disp."/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{path:'envioMaterialModel>QtdDisp', formatter: '.formatter.qtyValue' }"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="100px">
+                  <Label xmlns="sap.m" text="Qtde disp. UM"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioMaterialModel>QtdDispUn}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="100px">
+                  <Label xmlns="sap.m" text="Lote"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioMaterialModel>Lote}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="100px">
+                  <Label xmlns="sap.m" text="Qtde envio"/>
+                  <t:template>
+                    <!--<Input xmlns="sap.m" value="{path:'envioMaterialModel>QtdEnvio' }" type="Number" required="true" />-->
+                    <Input xmlns="sap.m" value="{path: 'envioMaterialModel>QtdEnvio', type:'sap.ui.model.type.Float', formatOptions:{minFractionDigits:3,maxFractionDigits:3}, constraints:{precision:13,scale:3}}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="100px">
+                  <Label xmlns="sap.m" text="Qtde envio UM"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioMaterialModel>QtdEnvioUn}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="150px">
+                  <Label xmlns="sap.m" text="Pedido"/>
+                  <t:template>
+                    <Input xmlns="sap.m" maxLength="10" value="{envioMaterialModel>Pedido}" change=".onChangePedidoItem"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="100px">
+                  <Label xmlns="sap.m" text="Item Pedido"/>
+                  <t:template>
+                    <Input xmlns="sap.m" maxLength="5" value="{envioMaterialModel>Item}" change=".onChangePedidoItem" />
+                  </t:template>
+                </t:Column>
+                <t:Column width="200px">
+                  <Label xmlns="sap.m" text="Produto acabado"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioMaterialModel>Componente}"/>
+                  </t:template>
+                </t:Column>
+              </t:columns>
+            </t:Table>
+          </blocks>
+        </ObjectPageSubSection>
+      </ObjectPageSection>
+
+      
+      <!--
+        ************ x41 ************
+      -->
+      <ObjectPageSection titleUppercase="false" id="pageSectionX41" title="{i18n>lblEnvioX41}">
+        <ObjectPageSubSection id="sectionX41Header" title="{i18n>lblData}" titleUppercase="false">
+          <blocks>
+            <m:VBox class="sapUiSmallMargin">
+              <form:SimpleForm layout="ResponsiveGridLayout" width="70%">
+                <core:Title text="Informar Dados"/>
+                <m:Label text="{i18n>lblPedido}"/>
+                <!-- <m:Input id="fldx41Search" width="200em" required="true" maxLength="10" value="{path: 'envioX41Model>/Pedido', type:'sap.ui.model.odata.type.String', constraints:{maxLength:10}}"/> -->
+                <m:MultiInput id="fldPedidoMulti" required="true" showValueHelp="false" width="50%" /> 
+                
+                <!-->>>>>-DMND0029225-16.01.2023 -->
+                <Label xmlns="sap.m" text="Centro"/>
+                <Select id="inWerksx41" forceSelection="false" editable="false"
+                  xmlns="sap.m" showSecondaryValues="true" wrapItemsText="true" width="47%" selectedKey="{envioX41Model>/Werks}" items="{path:'/ShPlantSet', templateShareable:true}">
+                  <core:ListItem key="{Plant}" text="{Plant} - {Name1}" />
+                </Select>
+                <Label xmlns="sap.m" text="Fornecedor"/>
+                <m:Input id="inLifnrx41" width="95%" editable="false" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onValueHelpRequestLifnr" suggestionItems="{
+										path: '/ShFornecedorSet',
+										sorter: { path: 'Name1' } }">
+                  <core:Item key="{Fornecedor}" text="{Name1} ({Fornecedor})" />
+                </m:Input>
+                <Text xmlns="sap.m" id="lblDescFornecedorx41" width="100%"/>
+                <!--<<<<<-DMND0029225-16.01.2023 -->
+
+              </form:SimpleForm>
+              <layout:HorizontalLayout class="sapUiContentPadding">
+                <m:Button type="Default" text="{i18n>btnAddItemsPedido}" icon="sap-icon://add-document" press="onSearchPedidoX41" />
+              </layout:HorizontalLayout>
+            </m:VBox>
+          </blocks>
+        </ObjectPageSubSection>
+        <ObjectPageSubSection id="section41Items" title="{i18n>lblItems}" titleUppercase="false">
+          <blocks>
+            <t:Table id="ItensX41Table" rows="{ path: 'envioX41Model>/Itens' }" selectionMode="MultiToggle" fixedColumnCount="2" visibleRowCountMode="Auto" minAutoRowCount="10">
+              <t:extension>
+                <OverflowToolbar xmlns="sap.m" width="100%">
+                  <ToolbarSpacer/>
+                  <m:Button id="btnParcelX41" text="{i18n>btnParcelItem}" type="Transparent" icon="sap-icon://split" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onParcelItemX41"/>
+                  <m:Button id="btnDelX41" text="Eliminar" type="Transparent" icon="sap-icon://delete" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onDelX41"/>
+                </OverflowToolbar>
+              </t:extension>
+              <t:columns>
+                <t:Column width="150px">
+                  <Label xmlns="sap.m" text="Pedido"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioX41Model>Pedido}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="100px">
+                  <Label xmlns="sap.m" text="Item Pedido"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioX41Model>Item}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="100px">
+                  <Label xmlns="sap.m" text="Centro"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioX41Model>Centro}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="100px">
+                  <Label xmlns="sap.m" text="Fornecedor"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioX41Model>Fornecedor}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="200px">
+                  <Label xmlns="sap.m" text="Material acabado"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioX41Model>MaterialAcab}" width="100px" />
+                  </t:template>
+                </t:Column>
+                <t:Column width="310px">
+                  <Label xmlns="sap.m" text="Descrição Material acabado" />
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioX41Model>MaterialAcabDesc}" width="300px" />
+                  </t:template>
+                </t:Column>
+                <t:Column width="200px">
+                  <Label xmlns="sap.m" text="Componente"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioX41Model>MaterialComp}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="310px">
+                  <Label xmlns="sap.m" text="Descrição componente"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioX41Model>MaterialCompDesc}" width="300px" />
+                  </t:template>
+                </t:Column>
+                <t:Column width="120px">
+                  <Label xmlns="sap.m" text="Depósito"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioX41Model>Deposito}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="100px">
+                  <Label xmlns="sap.m" text="Qtde pedido"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{ path: 'envioX41Model>QtdPedido', formatter: '.formatter.qtyValue' }"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="5em">
+                  <Label xmlns="sap.m" text="UM básica"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioX41Model>UmBasica}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="100px">
+                  <Label xmlns="sap.m" text="Qtde disponível"/>
+                  <t:template>
+                    <!--<Input xmlns="sap.m" id="fldQtdMatAcabadoManual" value="{ path: 'envioPedidoModel>QtdLote' }" type="Number"/>-->
+                    <Input xmlns="sap.m" id="fldQtdMatAcabadoManualX41" value="{path: 'envioX41Model>QtdLote', type:'sap.ui.model.type.Float', formatOptions:{minFractionDigits:3,maxFractionDigits:3}, constraints:{precision:13,scale:3}}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="150px">
+                  <Label xmlns="sap.m" text="Lote"/>
+                  <t:template>
+                    <Input id="inChargX41"
+                      xmlns="sap.m" value="{envioX41Model>Lote}" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequestCharg">
+                    </Input>
+                  </t:template>
+                </t:Column>
+              </t:columns>
+            </t:Table>
+          </blocks>
+        </ObjectPageSubSection>       
+      </ObjectPageSection>
+
+      <!--
+        ************ CONTRATO ************
+      -->
+      <ObjectPageSection titleUppercase="false" id="pageSectionContrato" title="{i18n>lblEnvioContrato}">
+        <ObjectPageSubSection id="sectionContratoHeader" title="{i18n>lblData}" titleUppercase="false">
+          <blocks>
+            <m:VBox class="sapUiSmallMargin">
+              <form:SimpleForm layout="ResponsiveGridLayout" width="70%">
+                <core:Title text="Informar Dados"/>
+                <m:Label text="{i18n>lblContrato}"/>
+                <m:Input id="fldContratoSearch" width="200em" required="true" maxLength="10" value="{path: 'envioContratoModel>/Contrato', type:'sap.ui.model.odata.type.String', constraints:{maxLength:10}}"/>
+                <m:Label text="{i18n>lblItem}"/>
+                <!-- <m:Input id="fldContratoItemSearch" width="75em" required="false" maxLength="5" value="{path: 'envioContratoModel>/Item', type:'sap.ui.model.odata.type.String', constraints:{maxLength:5}}"/> -->
+                <m:MultiInput id="fldContratoItemMulti" required="false" showValueHelp="false" width="200em"/> 
+                <Label xmlns="sap.m" text="Centro"/>
+                <Select id="inWerksContrato" forceSelection="false" editable="false"
+                  xmlns="sap.m" showSecondaryValues="true" wrapItemsText="true" width="47%" selectedKey="{envioContratoModel>/Werks}" items="{path:'/ShPlantSet', templateShareable:true}">
+                  <core:ListItem key="{Plant}" text="{Plant} - {Name1}" />
+                </Select>
+                <Label xmlns="sap.m" text="Fornecedor"/>
+                <m:Input id="inLifnrContrato" width="95%" editable="false" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onValueHelpRequestLifnr" suggestionItems="{
+										path: '/ShFornecedorSet',
+										sorter: { path: 'Name1' } }">
+                  <core:Item key="{Fornecedor}" text="{Name1} ({Fornecedor})" />
+                </m:Input>
+                <Text xmlns="sap.m" id="lblDescFornecedorContrato" width="100%"/>
+              </form:SimpleForm>
+              <layout:HorizontalLayout class="sapUiContentPadding">
+                <m:Button type="Default" text="{i18n>btnAddItemsContrato}" icon="sap-icon://add-document" press="onSearchContrato" />
+              </layout:HorizontalLayout>
+            </m:VBox>
+          </blocks>
+        </ObjectPageSubSection>
+        <ObjectPageSubSection id="sectionContratoItems" title="{i18n>lblItems}" titleUppercase="false">
+          <blocks>
+            <t:Table id="ItensContratoTable" rows="{ path: 'envioContratoModel>/Itens' }" selectionMode="MultiToggle" fixedColumnCount="2" visibleRowCountMode="Auto" minAutoRowCount="10">
+              <t:extension>
+                <OverflowToolbar xmlns="sap.m" width="100%">
+                  <ToolbarSpacer/>
+                  <m:Button	icon="sap-icon://download" text="Exportar CSV" type="Transparent" press="onDataExport" />
+                  <m:Button id="btnParcelContrato" text="{i18n>btnParcelItem}" type="Transparent" icon="sap-icon://split" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onParcelItemContrato"/>
+                  <m:Button id="btnDelContrato" text="Eliminar" type="Transparent" icon="sap-icon://delete" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onDelContrato"/>
+                </OverflowToolbar>
+              </t:extension>
+              <t:columns>
+                <t:Column width="150px">
+                  <Label xmlns="sap.m" text="{i18n>lblContrato}"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioContratoModel>Contrato}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="100px">
+                  <Label xmlns="sap.m" text="{i18n>lblItemContrato}"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioContratoModel>Item}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="200px">
+                  <Label xmlns="sap.m" text="Material acabado"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioContratoModel>MaterialAcab}" width="100px" />
+                  </t:template>
+                </t:Column>
+                <t:Column width="310px">
+                  <Label xmlns="sap.m" text="Descrição Material acabado" />
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioContratoModel>MaterialAcabDesc}" width="300px" />
+                  </t:template>
+                </t:Column>
+                <t:Column width="200px">
+                  <Label xmlns="sap.m" text="Componente"/>
+                  <t:template>
+                    <!-- <Text xmlns="sap.m" text="{envioContratoModel>MaterialComp}"/> -->
+                    <m:Select showSecondaryValues= "true" wrapItemsText="true" width="180px" forceSelection="false"
+                        selectedKey="{envioContratoModel>MaterialComp}" items="{envioContratoModel>Components}">
+                      <core:ListItem key="{envioContratoModel>Idnrk}"
+                          text="{envioContratoModel>Idnrk} - {envioContratoModel>Maktx}"
+                          additionalText= "{envioContratoModel>Kmpmg} {envioContratoModel>Kmpme}" />
+                    </m:Select>
+                  </t:template>
+                </t:Column>
+                <!-- 
+                <t:Column width="310px">
+                  <Label xmlns="sap.m" text="Descrição componente"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioContratoModel>MaterialCompDesc}" width="300px" />
+                  </t:template>
+                </t:Column>
+                -->
+                <t:Column width="120px">
+                  <Label xmlns="sap.m" text="Depósito"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioContratoModel>Deposito}"/>
+                  </t:template>
+                </t:Column>
+                <!--
+                <t:Column width="100px">
+                  <Label xmlns="sap.m" text="{i18n>lblQtdContrato}"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{ path: 'envioContratoModel>QtdContrato', formatter: '.formatter.qtyValue' }"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="5em">
+                  <Label xmlns="sap.m" text="UM básica"/>
+                  <t:template>
+                    <Text xmlns="sap.m" text="{envioContratoModel>UmBasica}"/>
+                  </t:template>
+                </t:Column>
+                -->
+                <t:Column width="100px">
+                  <Label xmlns="sap.m" text="Qtde disponível"/>
+                  <t:template>
+                    <!--<Input xmlns="sap.m" id="fldQtdMatAcabadoManual" value="{ path: 'envioPedidoModel>QtdLote' }" type="Number"/>-->
+                    <Input xmlns="sap.m" id="fldQtdMatAcabadoManualContrato" value="{path: 'envioContratoModel>QtdLote', type:'sap.ui.model.type.Float', formatOptions:{minFractionDigits:3,maxFractionDigits:3}, constraints:{precision:13,scale:3}}"/>
+                  </t:template>
+                </t:Column>
+                <t:Column width="150px">
+                  <Label xmlns="sap.m" text="Lote"/>
+                  <t:template>
+                    <Input id="inChargContrato"
+                      xmlns="sap.m" value="{envioContratoModel>Lote}" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequestCharg">
+                    </Input>
+                  </t:template>
+                </t:Column>
+              </t:columns>
+            </t:Table>
+          </blocks>
+        </ObjectPageSubSection>
+      </ObjectPageSection>
+
+    </sections>
+
+    <footer>
+      <m:OverflowToolbar>
+        <m:Button id="messagePopoverBtn" visible="{=!!${message>/}.length}" icon="{ path: '/', formatter: '.buttonIconFormatter' }" type="{ path: '/', formatter: '.buttonTypeFormatter' }" text= "{path: '/', formatter: '.highestSeverityMessages' }" press=".handleMessagePopoverPress" />
+        <m:ToolbarSpacer id="spacer1"/>
+        <m:Button text="Enviar" id="btnEnviar" icon="sap-icon://create" press="onSave" />
+        <m:Button text="Cancelar" id="btnCancelar" icon="sap-icon://sys-cancel" press="onCancelar" />
+      </m:OverflowToolbar>
+    </footer>
+
+  </ObjectPageLayout>
+
+  <!--	
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>EnvioIndust}">
+					<form:SimpleForm layout="ResponsiveGridLayout" width="70%">
+						<core:Title text="Informar Dados"/>
+							<Label xmlns="sap.m" text="Centro" id="lblCentro"/>
+							<Select id="inWerks" xmlns="sap.m" showSecondaryValues="true" wrapItemsText="true" width="47%" selectedKey="{ItensIndust_JSONModel>/Werks}" items="{path:'/ShPlantSet', templateShareable:true}">
+								<core:ListItem key="{Plant}" text="{Plant} - {Name1}" />
+							</Select>								
+							<Label xmlns="sap.m" text="Fornecedor" id="lblFornecedor"/>
+							<Input id="inLifnr" width="95%" placeholder="Selecionar Fornecedor" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onValueHelpRequestLifnr" suggestionItems="{
+										path: '/ShFornecedorSet',
+										sorter: { path: 'Name1' } }">
+								<core:Item key="{Fornecedor}" text="{Name1} ({Fornecedor})" />
+							</Input>
+							<Text xmlns="sap.m" id="lblDescFornecedor" width="100%"/>
+					</form:SimpleForm>
+					<content>
+						<t:Table id="ItensEnvIndustTable" rows="{ path: 'ItensIndust_JSONModel>/Itens' }" selectionMode="MultiToggle" fixedColumnCount="1" visibleRowCountMode="Auto" minAutoRowCount="10">
+							<t:toolbar>
+								<OverflowToolbar xmlns="sap.m" id="toolbar1" width="100%">
+									<ToolbarSpacer id="spacer0"/>
+									<OverflowToolbarButton id="btnNovo" text="Novo" type="Transparent" icon="sap-icon://write-new-document" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onNovo"/>
+									<OverflowToolbarButton id="btnDel" text="Eliminar" type="Transparent" icon="sap-icon://delete" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onDel"/>
+								</OverflowToolbar>
+							</t:toolbar>
+							<t:columns>
+								<t:Column id="column1" width="50px">
+									<Label xmlns="sap.m" text="Item" id="label1"/>
+									<t:template>
+										<Text xmlns="sap.m" text="{ItensIndust_JSONModel>Item}" wrapping="false" />
+									</t:template>
+								</t:Column>
+								<t:Column id="column2" width="200px">
+									<Label xmlns="sap.m" text="Material" id="label2"/>
+									<t:template>
+										<Input id="productInput" xmlns="sap.m" value="{ItensIndust_JSONModel>Matnr}" placeholder="Selecionar Material" showSuggestion="true" showValueHelp="true" change=".onvhMatnrChange" valueHelpRequest=".onValueHelpRequest" suggestionItems="{ItensIndust_JSONModel}">
+											<suggestionItems>
+												<core:Item text="{ItensIndust_JSONModel>Matnr}" />
+											</suggestionItems>
+										</Input>
+									</t:template>
+								</t:Column>
+								<t:Column id="column3" width="310px">
+									<Label xmlns="sap.m" text="Descrição Material" id="label3"/>
+									<t:template>
+										<Text xmlns="sap.m" id="txtMaktx" text="{ItensIndust_JSONModel>Maktx}" width="300px" />
+									</t:template>
+								</t:Column>
+								<t:Column id="column4" width="120px">
+									<Label xmlns="sap.m" text="Depósito" id="label4"/>
+									<t:template>
+										<Input id="inLgort" xmlns="sap.m" value="{ItensIndust_JSONModel>Lgort}" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequestLgort" suggestionItems="{ItensIndust_JSONModel}">
+											<suggestionItems>
+												<core:Item text="{ItensIndust_JSONModel>Lgort}" />
+											</suggestionItems>
+										</Input>
+									</t:template>
+								</t:Column>
+								<t:Column id="column5" width="100px">
+									<Label xmlns="sap.m" text="Qtde Saída" id="label5"/>
+									<t:template>
+										<Input xmlns="sap.m" value="{ItensIndust_JSONModel>Menge}" type="Number" required="true" />
+									</t:template>
+								</t:Column>
+								<t:Column id="column6" width="150px">
+									<Label xmlns="sap.m" text="Lote" id="label6"/>
+									<t:template>
+										<Input id="inCharg" xmlns="sap.m" value="{ItensIndust_JSONModel>Charg}" showSuggestion="true" showValueHelp="true" valueHelpRequest=".onValueHelpRequestCharg" suggestionItems="{ItensIndust_JSONModel}">
+											<suggestionItems>
+												<core:Item text="{ItensIndust_JSONModel>Charg}" />
+											</suggestionItems>
+										</Input>
+									</t:template>
+								</t:Column>
+								<t:Column id="column8" width="150px">
+									<Label xmlns="sap.m" text="Pedido" id="label8"/>
+									<t:template>
+										<Input xmlns="sap.m" value="{ItensIndust_JSONModel>Ebeln}" />
+									</t:template>
+								</t:Column>
+								<t:Column id="column9" width="100px">
+									<Label xmlns="sap.m" text="Item Pedido" id="label9"/>
+									<t:template>
+										<Input xmlns="sap.m" value="{ItensIndust_JSONModel>Ebelp}" />
+									</t:template>
+								</t:Column>
+							</t:columns>
+						</t:Table>
+					</content>
+					<footer>
+						<OverflowToolbar>
+							<Button id="messagePopoverBtn" visible="{=!!${message>/}.length}" icon="{ path: '/', formatter: '.buttonIconFormatter' }" type="{ path: '/', formatter: '.buttonTypeFormatter' }" text= "{path: '/', formatter: '.highestSeverityMessages' }" press=".handleMessagePopoverPress" />				
+							<ToolbarSpacer id="spacer1"/>
+							<Button text="Enviar" id="btnEnviar" icon="sap-icon://create" press="onEnviar" />
+							<Button text="Cancelar" id="btnCancelar" icon="sap-icon://sys-cancel" press="onCancelar" />
+						</OverflowToolbar>
+					</footer>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+	-->
+</mvc:View>

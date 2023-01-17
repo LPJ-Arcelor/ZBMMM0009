@@ -1,0 +1,50 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog id="x41LogDialog" title="{i18n>lblLogDialogTitle}">
+		<Table id="x41LogTable" inset="false" items="{ path: 'envioX41Model>/ToLog' }">
+			<headerToolbar>
+				<OverflowToolbar>
+					<content>
+						<Title text="{i18n>lblLogTable}" level="H2"/>
+						<ToolbarSpacer />
+					</content>
+				</OverflowToolbar>
+			</headerToolbar>
+			<columns>
+				<Column width="150px">
+					<Text text="Pedido/Item" />
+				</Column>
+				<Column width="200px">
+					<Text text="Material" />
+				</Column>
+				<Column width="100px">
+					<Text text="Fornecedor" />
+				</Column>
+				<Column width="150px">
+					<Text text="Remessa" />
+				</Column>
+				<Column width="150px">
+					<Text text="Transporte" />
+				</Column>
+				<Column width="700px">
+					<Text text="Mensagem" />
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem vAlign="Middle">
+					<cells>
+						<ObjectIdentifier title="{envioX41Model>Pedido}" text="{envioX41Model>Item}"/>
+						<Text text="{envioX41Model>Material}" />
+						<Text text="{envioX41Model>Fornecedor}" />
+						<Text text="{envioX41Model>Remessa}" />
+						<Text text="{envioX41Model>Transporte}" />
+						<Text text="{envioX41Model>Erro}" />
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<beginButton>
+			<Button text="{i18n>lblBtnCloseLog}" press=".onCloseDialogX41"/>
+		</beginButton>
+	</Dialog>
+</core:FragmentDefinition>

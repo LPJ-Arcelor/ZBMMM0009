@@ -1,0 +1,189 @@
+<mvc:View controllerName="br.com.arcelor.zbmmm0009.controller.NotaFiscalDetails"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" displayBlock="true" height="100%"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<f:DynamicPage headerExpanded="true" showFooter="true">
+
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<!--<Title text="NF Saída de Mercadorias { path: 'mNFSaida>/Docnum', formatter: '.formatter.intValue' }"/>-->
+					<Title text="{i18n>notaFiscalTitle}"/>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+
+		<f:header>
+			<f:DynamicPageHeader pinnable="false">
+				<f:content>
+					<form:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="2" labelSpanL="2" labelSpanM="2" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="1" emptySpanL="1" emptySpanM="1" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+						<form:content>
+							<Label text="{i18n>lblFornecedor}"/>
+							<Text text="{mNFSaida>/Fornec}"/>
+
+							<Label text="{i18n>lblNumNfe}"/>
+							<Text text="{mNFSaida>/Nfenum}"/>
+
+							<Label text="{i18n>lblSerie}"/>
+							<Text text="{mNFSaida>/Series}"/>
+
+							<Label text="{i18n>lblSubSerie}"/>
+							<Text text="{mNFSaida>/Subser}"/>
+
+							<Label text="{i18n>lblDataDoc}"/>
+							<Text text="{ path: 'mNFSaida>/Docdat', type:'sap.ui.model.type.Date', formatOptions : { pattern: 'dd/MM/yyyy', strictParsing: true , UTC: true } }" />
+
+							<Label text="{i18n>lblDataLancamento}"/>
+							<Text text="{ path: 'mNFSaida>/Pstdat', type:'sap.ui.model.type.Date', formatOptions : { pattern: 'dd/MM/yyyy', strictParsing: true , UTC: true } }" />
+						</form:content>
+					</form:SimpleForm>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+
+		<f:content>
+			<IconTabBar id="idIconTabBar" expanded="{device>/isNoPhone}" class="sapUiNoContentPadding">
+
+				<items>
+					<IconTabFilter key="tab_sintese" text="{i18n>lblSintese}" iconColor="Default" icon="sap-icon://activities" class="sapUiNoContentPadding">
+						<Table id="tbSintese" inset="true" items="{mNFSaida>/Items}" alternateRowColors="true" mode="None" noDataText="{i18n>lblSemDados}">
+							<columns>
+								<Column minScreenWidth="Phone" demandPopin="true" hAlign="Center">
+									<Text text="{i18n>lblNumItem}"/>
+								</Column>
+								<Column minScreenWidth="Phone" demandPopin="true" hAlign="Center">
+									<Text text="{i18n>lblTipoItemNf}"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+									<Text text="{i18n>lblItemEstatistico}"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+									<Text text="{i18n>lblIssSem}"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+									<Text text="{i18n>lblMaterial}"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true">
+									<Text text="{i18n>lblServico}"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+									<Text text="{i18n>lblCentro}"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+									<Text text="{i18n>lblTipoAvaliacao}"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true">
+									<Text text="{i18n>lblDenominacao}"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem vAlign="Middle">
+									<cells>
+										<Text text="{ path: 'mNFSaida>Itmnum', formatter: '.formatter.intValue' }" />
+										<Text text="{mNFSaida>Itmtyp}" />
+										<Text text="{= ${mNFSaida>Statit} ? 'Sim' : 'Não' }" />
+										<Text text="{= ${mNFSaida>Tmiss} ? 'Sim' : 'Não' }" />
+										<Text text="{mNFSaida>Matnr}" />
+										<Text text="{mNFSaida>Srvnr}" />
+										<Text text="{mNFSaida>Werks}" />
+										<Text text="{mNFSaida>Bwtar}" />
+										<Text text="{mNFSaida>Maktx}" />
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</IconTabFilter>
+					<IconTabFilter key="tab_nfe" text="{i18n>lblDadosNfe}" iconColor="Positive" icon="sap-icon://sales-order-item">
+						<form:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="2" labelSpanL="2" labelSpanM="2" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="1" emptySpanL="1" emptySpanM="1" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+							<form:content>
+								<core:Title text="{i18n>lblNfeSefaz}"/>
+								<Label text="{i18n>lblNumLog}"/>
+								<Text text="{mNFSaida>/Nfe/Authcod}"/>
+
+								<Label text="{i18n>lblDataProcessamento}"/>
+								<Text text="{ path: 'mNFSaida>/Nfe/Authdate', type:'sap.ui.model.type.Date', formatOptions : { pattern: 'dd/MM/yyyy', strictParsing: true , UTC: true } }" />
+
+								<Label text="{i18n>lblHoraProcessamento}"/>
+								<Text text="{ path: 'mNFSaida>/Nfe/Authtime', type:'sap.ui.model.odata.type.Time', formatOptions : { pattern : 'HH:mm:ss'} }" />
+
+								<Label text="{i18n>lblStatusDoc}"/>
+								<Text text="{mNFSaida>/Nfe/Docstat} {mNFSaida>/Nfe/DocstatText}"/>
+
+								<Label text="{i18n>lblVersaoXml}"/>
+								<Text text="{mNFSaida>/Nfe/Xmlvers}" />
+
+								<Label text="{i18n>lblLancadoCont}"/>
+								<Text text="{= ${mNFSaida>/Nfe/Conting} ? 'Sim' : 'Não' }" />
+
+							</form:content>
+						</form:SimpleForm>
+
+						<form:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="1" emptySpanL="1" emptySpanM="1" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false">
+							<form:content>
+								<core:Title text="{i18n>lblChaveAcessoSefaz}"/>
+								<Label text="{i18n>lblRegiao}"/>
+								<Text text="{mNFSaida>/Nfe/Regio}" />
+
+								<Label text="{i18n>lblExercicioContabil}"/>
+								<Text text="{mNFSaida>/Nfe/Nfyear}"/>
+
+								<Label text="{i18n>lblMesDocumento}"/>
+								<Text text="{mNFSaida>/Nfe/Nfmonth}"/>
+
+								<Label text="{i18n>lblCnpjCpf}"/>
+								<Text text="{mNFSaida>/Nfe/Stcd1}"/>
+
+								<Label text="{i18n>lblModeloNf}"/>
+								<Text text="{mNFSaida>/Nfe/Model}"/>
+
+								<Label text="{i18n>lblChaveAcesso}"/>
+								<Text text="{mNFSaida>/Nfe/ChvAcesso}"/>
+
+								<core:Title text=""/>
+								<Label text="{i18n>lblSerie}"/>
+								<Text text="{mNFSaida>/Nfe/Serie}"/>
+
+								<Label text="{i18n>lblNumNfe}"/>
+								<Text text="{mNFSaida>/Nfe/Nfnum9}"/>
+
+								<Label text="{i18n>lblTipoEmissao}"/>
+								<Text text="{mNFSaida>/Nfe/Tpemis}"/>
+
+								<Label text="{i18n>lblNumeroAleatorio}"/>
+								<Text text="{mNFSaida>/Nfe/Docnum9}"/>
+
+								<Label text="{i18n>lblDigitoVerificador}"/>
+								<Text text="{mNFSaida>/Nfe/Cdv}"/>
+							</form:content>
+						</form:SimpleForm>
+
+						<form:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="2" labelSpanL="2" labelSpanM="2" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="1" emptySpanL="1" emptySpanM="1" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+							<form:content>
+								<core:Title text="{i18n>lblCodigo}"/>
+								<Label text="Consumidor final"/>
+								<Text text="{mNFSaida>/Nfe/IndFinal} {mNFSaida>/Nfe/IndFinalText}"/>
+
+								<Label text="{i18n>lblPresConsumFinal}"/>
+								<Text text="{mNFSaida>/Nfe/IndPres} {mNFSaida>/Nfe/IndPresText}"/>
+
+								<Label text="{i18n>lblDest}"/>
+								<Text text="{mNFSaida>/Nfe/IdDest} {mNFSaida>/Nfe/IdDestText}"/>
+							</form:content>
+						</form:SimpleForm>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</f:content>
+
+		<f:footer>
+			<Toolbar>
+				<ToolbarSpacer />
+				<Button icon="sap-icon://nav-back" text="{i18n>btnVoltar}" press="onNavBack" />
+			</Toolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

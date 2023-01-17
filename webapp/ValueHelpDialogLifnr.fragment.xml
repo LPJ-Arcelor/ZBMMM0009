@@ -1,0 +1,16 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog
+		id="selectDialogLifnr"
+		title="Fornecedores"
+		items="{/ShFornecedorSet}"
+		search=".onValueHelpSearchLifnr"
+		confirm=".onValueHelpCloseLifnr"
+		cancel=".onValueHelpCloseLifnr">
+		<StandardListItem
+			icon=""
+			iconDensityAware="false"
+			iconInset="false"
+			title="{Fornecedor}"
+			description="{Name1}" />
+	</SelectDialog>
+</core:FragmentDefinition>

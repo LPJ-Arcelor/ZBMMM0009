@@ -1,0 +1,172 @@
+{
+    "_version": "1.17.0",
+    "sap.app": {
+        "id": "br.com.arcelor.zbmmm0009",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "resources": "resources.json",
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZBMMM0009_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "notaFiscalService": {
+                "uri": "/sap/opu/odata/sap/ZBMMM0012_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            }
+        },
+        "sourceTemplate": {
+            "id": "@sap/ux-app-migrator:freestyle",
+            "version": "1.7.4",
+            "toolsId": "74ef62d5-e507-4841-9505-ccd41dabaaab"
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "sap-icon://task",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "config": {
+            "fullWidth": true
+        },
+        "rootView": {
+            "viewName": "br.com.arcelor.zbmmm0009.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "app"
+        },
+        "dependencies": {
+            "minUI5Version": "1.71.42",
+            "libs": {
+                "sap.ui.core": {},
+                "sap.m": {},
+                "sap.f": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "br.com.arcelor.zbmmm0009.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true
+            },
+            "notaFiscalModel": {
+                "type": "sap.ui.model.odata.v2.ODataModel",
+                "dataSource": "notaFiscalService",
+                "preload": true
+            },
+            "ItensIndust_JSONModel": {
+                "type": "sap.ui.model.json.JSONModel"
+            },
+            "envioPedidoModel": {
+                "type": "sap.ui.model.json.JSONModel"
+            },
+            "envioContratoModel": {
+                "type": "sap.ui.model.json.JSONModel"
+            },
+            "envioMaterialModel": {
+                "type": "sap.ui.model.json.JSONModel"
+            },
+            "envioX41Model": {
+                "type": "sap.ui.model.json.JSONModel"
+            }
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "viewPath": "br.com.arcelor.zbmmm0009.view",
+                "controlId": "app",
+                "controlAggregation": "pages",
+                "bypassed": {
+                    "target": [
+                        "notFound"
+                    ]
+                },
+                "async": true
+            },
+            "routes": [
+                {
+                    "pattern": "",
+                    "name": "worklist",
+                    "target": [
+                        "worklist"
+                    ]
+                },
+                {
+                    "pattern": "EnvioIndust/",
+                    "name": "RouteEnvioIndust",
+                    "target": [
+                        "TargetEnvioIndust"
+                    ]
+                },
+                {
+                    "name": "notaFiscal",
+                    "pattern": "notaFiscal/{docnum}",
+                    "target": [
+                        "notaFiscal"
+                    ]
+                }
+            ],
+            "targets": {
+                "worklist": {
+                    "viewName": "Worklist",
+                    "viewId": "worklist",
+                    "viewLevel": 1,
+                    "title": "{i18n>worklistViewTitle}"
+                },
+                "TargetEnvioIndust": {
+                    "viewId": "EnvioIndust",
+                    "viewName": "EnvioIndust",
+                    "viewLevel": 2
+                },
+                "notaFiscal": {
+                    "viewName": "NotaFiscalDetails",
+                    "viewId": "notaFiscal",
+                    "viewLevel": 2
+                },
+                "notFound": {
+                    "viewName": "NotFound",
+                    "viewId": "notFound"
+                }
+            }
+        }
+    },
+    "sap.platform.abap": {
+        "uri": "/sap/bc/ui5_ui5/sap/zbmmm0009",
+        "_version": "1.1.0"
+    }
+}

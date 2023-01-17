@@ -1,0 +1,343 @@
+{
+    "resources": [
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "model/models-dbg.js"
+        },
+        {
+            "name": "model/formatter-dbg.js"
+        },
+        {
+            "name": "model/formatter.js"
+        },
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "controller/EnvioIndust.controller.js"
+        },
+        {
+            "name": "controller/BaseController.js"
+        },
+        {
+            "name": "controller/Object-dbg.controller.js"
+        },
+        {
+            "name": "controller/NotaFiscalDetails.controller.js"
+        },
+        {
+            "name": "controller/NotFound.controller.js"
+        },
+        {
+            "name": "controller/BaseController-dbg.js"
+        },
+        {
+            "name": "controller/Worklist.controller.js"
+        },
+        {
+            "name": "controller/App.controller.js"
+        },
+        {
+            "name": "controller/Object.controller.js"
+        },
+        {
+            "name": "controller/ErrorHandler-dbg.js"
+        },
+        {
+            "name": "controller/Worklist-dbg.controller.js"
+        },
+        {
+            "name": "controller/EnvioIndust-dbg.controller.js"
+        },
+        {
+            "name": "controller/ErrorHandler.js"
+        },
+        {
+            "name": "controller/App-dbg.controller.js"
+        },
+        {
+            "name": "controller/NotFound-dbg.controller.js"
+        },
+        {
+            "name": "controller/NotaFiscalDetails-dbg.controller.js"
+        },
+        {
+            "name": "utils/locate-reuse-libs.js"
+        },
+        {
+            "name": "utils/locate-reuse-libs-dbg.js"
+        },
+        {
+            "name": "ValueHelpDialog.fragment.xml"
+        },
+        {
+            "name": "ValueHelpDialogMaterial.fragment.xml"
+        },
+        {
+            "name": "ValueHelpDialogLgort.fragment.xml"
+        },
+        {
+            "name": "test.html"
+        },
+        {
+            "name": "ValueHelpDialogLifnr.fragment.xml"
+        },
+        {
+            "name": "ValueHelpDialogCharg.fragment.xml"
+        },
+        {
+            "name": "Component-dbg.js"
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "fragment/vhDeposito.fragment.xml"
+        },
+        {
+            "name": "test/mockServer.html"
+        },
+        {
+            "name": "test/flpSandbox.html"
+        },
+        {
+            "name": "test/testsuite.qunit.js"
+        },
+        {
+            "name": "test/integration/NotFoundJourney.js"
+        },
+        {
+            "name": "test/integration/NavigationJourney-dbg.js"
+        },
+        {
+            "name": "test/integration/AllJourneys.js"
+        },
+        {
+            "name": "test/integration/ObjectJourney-dbg.js"
+        },
+        {
+            "name": "test/integration/AllJourneys-dbg.js"
+        },
+        {
+            "name": "test/integration/opaTests.qunit.html"
+        },
+        {
+            "name": "test/integration/pages/App.js"
+        },
+        {
+            "name": "test/integration/pages/Common.js"
+        },
+        {
+            "name": "test/integration/pages/Browser.js"
+        },
+        {
+            "name": "test/integration/pages/Worklist-dbg.js"
+        },
+        {
+            "name": "test/integration/pages/App-dbg.js"
+        },
+        {
+            "name": "test/integration/pages/Common-dbg.js"
+        },
+        {
+            "name": "test/integration/pages/Worklist.js"
+        },
+        {
+            "name": "test/integration/pages/shareOptions-dbg.js"
+        },
+        {
+            "name": "test/integration/pages/Object.js"
+        },
+        {
+            "name": "test/integration/pages/Browser-dbg.js"
+        },
+        {
+            "name": "test/integration/pages/NotFound-dbg.js"
+        },
+        {
+            "name": "test/integration/pages/shareOptions.js"
+        },
+        {
+            "name": "test/integration/pages/NotFound.js"
+        },
+        {
+            "name": "test/integration/pages/Object-dbg.js"
+        },
+        {
+            "name": "test/integration/opaTests.qunit.js"
+        },
+        {
+            "name": "test/integration/NotFoundJourney-dbg.js"
+        },
+        {
+            "name": "test/integration/FLPIntegrationJourney.js"
+        },
+        {
+            "name": "test/integration/ObjectJourney.js"
+        },
+        {
+            "name": "test/integration/opaTests.qunit-dbg.js"
+        },
+        {
+            "name": "test/integration/FLPIntegrationJourney-dbg.js"
+        },
+        {
+            "name": "test/integration/WorklistJourney-dbg.js"
+        },
+        {
+            "name": "test/integration/WorklistJourney.js"
+        },
+        {
+            "name": "test/integration/NavigationJourney.js"
+        },
+        {
+            "name": "test/integration/arrangements/FLP.js"
+        },
+        {
+            "name": "test/integration/arrangements/Startup.js"
+        },
+        {
+            "name": "test/integration/arrangements/Startup-dbg.js"
+        },
+        {
+            "name": "test/integration/arrangements/FLP-dbg.js"
+        },
+        {
+            "name": "test/initFlpSandbox.js"
+        },
+        {
+            "name": "test/testsuite.qunit-dbg.js"
+        },
+        {
+            "name": "test/flpSandbox.js"
+        },
+        {
+            "name": "test/initFlpSandboxMockServer-dbg.js"
+        },
+        {
+            "name": "test/initFlpSandboxMockServer.js"
+        },
+        {
+            "name": "test/initMockServer-dbg.js"
+        },
+        {
+            "name": "test/unit/AllTests.js"
+        },
+        {
+            "name": "test/unit/AllTests-dbg.js"
+        },
+        {
+            "name": "test/unit/unitTests.qunit.js"
+        },
+        {
+            "name": "test/unit/model/formatter.js"
+        },
+        {
+            "name": "test/unit/model/models.js"
+        },
+        {
+            "name": "test/unit/model/models-dbg.js"
+        },
+        {
+            "name": "test/unit/model/formatter-dbg.js"
+        },
+        {
+            "name": "test/unit/unitTests.qunit.html"
+        },
+        {
+            "name": "test/unit/helper/FakeI18nModel.js"
+        },
+        {
+            "name": "test/unit/helper/FakeI18nModel-dbg.js"
+        },
+        {
+            "name": "test/unit/unitTests.qunit-dbg.js"
+        },
+        {
+            "name": "test/initFlpSandbox-dbg.js"
+        },
+        {
+            "name": "test/testsuite.qunit.html"
+        },
+        {
+            "name": "test/flpSandboxMockServer.html"
+        },
+        {
+            "name": "test/initMockServer.js"
+        },
+        {
+            "name": "test/flpSandbox-dbg.js"
+        },
+        {
+            "name": "index.html"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "view/NotFound.view.xml"
+        },
+        {
+            "name": "view/EnvioIndust.view.xml"
+        },
+        {
+            "name": "view/ObjectNotFound.view.xml"
+        },
+        {
+            "name": "view/Worklist.view.xml"
+        },
+        {
+            "name": "view/App.view.xml"
+        },
+        {
+            "name": "view/Object.view.xml"
+        },
+        {
+            "name": "view/NotaFiscalDetails.view.xml"
+        },
+        {
+            "name": ".project.json"
+        },
+        {
+            "name": "neo-app.json"
+        },
+        {
+            "name": "x41LogDialog.fragment.xml"
+        },
+        {
+            "name": ".user.project.json"
+        },
+        {
+            "name": "localService/mockserver-dbg.js"
+        },
+        {
+            "name": "localService/metadata.xml"
+        },
+        {
+            "name": "localService/mockserver.js"
+        },
+        {
+            "name": "resources.json",
+            "merged": true
+        },
+        {
+            "name": "util/formatter-dbg.js"
+        },
+        {
+            "name": "util/formatter.js"
+        },
+        {
+            "name": "manifest-bundle.zip"
+        },
+        {
+            "name": "resources/sap-ui-version.json"
+        }
+    ]
+}

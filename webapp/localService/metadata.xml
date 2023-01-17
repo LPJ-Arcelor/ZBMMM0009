@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="http://localhost:8080/webidedispatcher/destinations/MB1/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='BACKEND_ECC')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://localhost:8080/webidedispatcher/destinations/MB1/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='BACKEND_ECC')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://localhost:8080/webidedispatcher/destinations/MB1/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='BACKEND_ECC')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Validation.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://localhost:8080/webidedispatcher/destinations/MB1/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='BACKEND_ECC')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://localhost:8080/webidedispatcher/destinations/MB1/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='BACKEND_ECC')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://localhost:8080/webidedispatcher/destinations/MB1/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='BACKEND_ECC')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZBMMM0009_SRV" xml:lang="pt" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="DocItm" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Docnum"/>
+                    <PropertyRef Name="Itmnum"/>
+                </Key>
+                <Property Name="Docnum" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Nº documento"/>
+                <Property Name="Itmnum" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="Nº item"/>
+            </EntityType>
+            <EntityType Name="DocItmXMLs" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Docnum"/>
+                    <PropertyRef Name="Itmnum"/>
+                </Key>
+                <Property Name="Docnum" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Nº documento"/>
+                <Property Name="Itmnum" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="Nº item"/>
+                <Property Name="XmlTid" Type="Edm.String" Nullable="false" sap:label="Valor XML"/>
+                <Property Name="XmlNfe" Type="Edm.String" Nullable="false" sap:label="Valor XML"/>
+                <Property Name="Nfenum" Type="Edm.String" Nullable="false" MaxLength="9" sap:label="Nº NF-e"/>
+            </EntityType>
+            <EntityType Name="ShMatnr" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Matnr"/>
+                </Key>
+                <Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="Material"/>
+                <Property Name="Maktx" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Denominação"/>
+                <Property Name="Matkl" Type="Edm.String" Nullable="false" MaxLength="9" sap:label="GrpMercads."/>
+            </EntityType>
+            <EntityType Name="ItensIndust" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdHeader"/>
+                    <PropertyRef Name="Item"/>
+                </Key>
+                <Property Name="IdHeader" Type="Edm.Int16" Nullable="false" sap:label="Signed INT2 / int16"/>
+                <Property Name="Item" Type="Edm.Int16" Nullable="false" sap:label="Signed INT2 / int16"/>
+                <Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="18"/>
+                <Property Name="Lgort" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Menge" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
+                <Property Name="Charg" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Ebeln" Type="Edm.String" MaxLength="10"/>
+                <Property Name="Ebelp" Type="Edm.String" MaxLength="5"/>
+                <Property Name="Meins" Type="Edm.String" MaxLength="3"/>
+                <Property Name="MaterialAcabado" Type="Edm.String" MaxLength="18"/>
+                <Property Name="MaterialAcabadoDesc" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="HeaderIndust" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Int16" Nullable="false" sap:label="Signed INT2 / int16"/>
+                <Property Name="Werks" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Lifnr" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <NavigationProperty Name="HeaderIndustToItensIndust" Relationship="ZBMMM0009_SRV.HeaderIndustToItensIndust" FromRole="FromRole_HeaderIndustToItensIndust" ToRole="ToRole_HeaderIndustToItensIndust"/>
+            </EntityType>
+            <EntityType Name="ShMatnrWerks" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Werks"/>
+                    <PropertyRef Name="Matnr"/>
+                </Key>
+                <Property Name="Matkl" Type="Edm.String" Nullable="false" MaxLength="9" sap:label="GrpMercads."/>
+                <Property Name="Werks" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Centro"/>
+                <Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="Material"/>
+                <Property Name="Maktg" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Denominação"/>
+                <Property Name="Maktx" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="Lifnr" Type="Edm.String" Nullable="false" MaxLength="10"/>
+            </EntityType>
+            <EntityType Name="ShFornecedor" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Centro"/>
+                    <PropertyRef Name="Fornecedor"/>
+                </Key>
+                <Property Name="Centro" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Fornecedor" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Name1" Type="Edm.String" Nullable="false" MaxLength="35"/>
+            </EntityType>
+            <EntityType Name="returnMsg" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Type"/>
+                </Key>
+                <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="Message" Type="Edm.String" Nullable="false" MaxLength="255"/>
+            </EntityType>
+            <EntityType Name="RelIndust" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Branch" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Local do negócio"/>
+                <Property Name="Bwart" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Movimento"/>
+                <Property Name="Cancel" Type="Edm.Boolean" Nullable="false" sap:label="Estornado"/>
+                <Property Name="Cfop" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="CFOP"/>
+                <Property Name="Charg" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Lote"/>
+                <Property Name="Docdat" Type="Edm.DateTime" Precision="7" sap:display-format="Date" sap:label="Data"/>
+                <Property Name="DocdatAno" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Ano NF-e"/>
+                <Property Name="Docnum" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="DOC NUM"/>
+                <Property Name="Ebeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Pedido"/>
+                <Property Name="Id" Type="Edm.Int32" Nullable="false" sap:label="Id" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Itmnum" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="Item" sap:filterable="false"/>
+                <Property Name="Lgort" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Depósito"/>
+                <Property Name="Maktx" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Descrição do Material" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="Material"/>
+                <Property Name="Meins" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="UM" sap:semantics="unit-of-measure"/>
+                <Property Name="Menge" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:label="Quantidade"/>
+                <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Descrição" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Nfenum" Type="Edm.String" Nullable="false" MaxLength="9" sap:label="Nota Fiscal"/>
+                <Property Name="Nitemped" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="Nº item"/>
+                <Property Name="Parid" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Fornecedor"/>
+                <Property Name="Refkey" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Doc. material"/>
+                <Property Name="Serie" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Série"/>
+                <Property Name="Werks" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Centro"/>
+                <Property Name="IsNfOk" Type="Edm.Boolean" Nullable="false" sap:label="Flag"/>
+            </EntityType>
+            <EntityType Name="ShPlant" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Plant"/>
+                </Key>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Centro"/>
+                <Property Name="Name1" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Nome"/>
+                <Property Name="City" Type="Edm.String" Nullable="false" MaxLength="25" sap:label="Local"/>
+                <Property Name="Region" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Região"/>
+            </EntityType>
+            <EntityType Name="ShLifnr" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Lifnr"/>
+                </Key>
+                <Property Name="Lifnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Fornecedor"/>
+                <Property Name="Name1" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Nome"/>
+                <Property Name="Mcod1" Type="Edm.String" Nullable="false" MaxLength="25"/>
+            </EntityType>
+            <EntityType Name="ShMatnrLgort" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Matnr"/>
+                    <PropertyRef Name="Werks"/>
+                    <PropertyRef Name="Lgort"/>
+                </Key>
+                <Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="18"/>
+                <Property Name="Werks" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Lgort" Type="Edm.String" Nullable="false" MaxLength="4"/>
+            </EntityType>
+            <EntityType Name="ShMatnrCharg" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Matnr"/>
+                    <PropertyRef Name="Werks"/>
+                    <PropertyRef Name="Lgort"/>
+                    <PropertyRef Name="Charg"/>
+                </Key>
+                <Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="18"/>
+                <Property Name="Werks" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Lgort" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Charg" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Clabs" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
+            </EntityType>
+            <EntityType Name="FileDanfe" m:HasStream="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="DocNum"/>
+                </Key>
+                <Property Name="DocNum" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Pdf" Type="Edm.String" Nullable="false"/>
+                <Property Name="Message" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="MaterialAcabado" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Ebeln"/>
+                    <PropertyRef Name="Ebelp"/>
+                </Key>
+                <Property Name="Ebeln" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Ebelp" Type="Edm.String" Nullable="false" MaxLength="5"/>
+                <Property Name="Material" Type="Edm.String" MaxLength="18"/>
+                <Property Name="Descricao" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <Association Name="HeaderIndustToItensIndust" sap:content-version="1">
+                <End Type="ZBMMM0009_SRV.HeaderIndust" Multiplicity="1" Role="FromRole_HeaderIndustToItensIndust"/>
+                <End Type="ZBMMM0009_SRV.ItensIndust" Multiplicity="*" Role="ToRole_HeaderIndustToItensIndust"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_HeaderIndustToItensIndust">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_HeaderIndustToItensIndust">
+                        <PropertyRef Name="IdHeader"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZBMMM0009_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="DocItmSet" EntityType="ZBMMM0009_SRV.DocItm" sap:content-version="1"/>
+                <EntitySet Name="DocItmXMLsSet" EntityType="ZBMMM0009_SRV.DocItmXMLs" sap:content-version="1"/>
+                <EntitySet Name="ShMatnrSet" EntityType="ZBMMM0009_SRV.ShMatnr" sap:content-version="1"/>
+                <EntitySet Name="ItensIndustSet" EntityType="ZBMMM0009_SRV.ItensIndust" sap:content-version="1"/>
+                <EntitySet Name="HeaderIndustSet" EntityType="ZBMMM0009_SRV.HeaderIndust" sap:content-version="1"/>
+                <EntitySet Name="ShMatnrWerksSet" EntityType="ZBMMM0009_SRV.ShMatnrWerks" sap:content-version="1"/>
+                <EntitySet Name="ShFornecedorSet" EntityType="ZBMMM0009_SRV.ShFornecedor" sap:content-version="1"/>
+                <EntitySet Name="returnMsgSet" EntityType="ZBMMM0009_SRV.returnMsg" sap:content-version="1"/>
+                <EntitySet Name="RelIndustSet" EntityType="ZBMMM0009_SRV.RelIndust" sap:content-version="1"/>
+                <EntitySet Name="ShPlantSet" EntityType="ZBMMM0009_SRV.ShPlant" sap:content-version="1"/>
+                <EntitySet Name="ShLifnrSet" EntityType="ZBMMM0009_SRV.ShLifnr" sap:content-version="1"/>
+                <EntitySet Name="ShMatnrLgortSet" EntityType="ZBMMM0009_SRV.ShMatnrLgort" sap:content-version="1"/>
+                <EntitySet Name="ShMatnrChargSet" EntityType="ZBMMM0009_SRV.ShMatnrCharg" sap:content-version="1"/>
+                <EntitySet Name="FileDanfeSet" EntityType="ZBMMM0009_SRV.FileDanfe" sap:content-version="1"/>
+                <EntitySet Name="MaterialAcabadoSet" EntityType="ZBMMM0009_SRV.MaterialAcabado" sap:content-version="1"/>
+                <AssociationSet Name="HeaderIndustToItensIndustSet" Association="ZBMMM0009_SRV.HeaderIndustToItensIndust" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="HeaderIndustSet" Role="FromRole_HeaderIndustToItensIndust"/>
+                    <End EntitySet="ItensIndustSet" Role="ToRole_HeaderIndustToItensIndust"/>
+                </AssociationSet>
+                <FunctionImport Name="DownloadXML" ReturnType="Collection(ZBMMM0009_SRV.DocItmXMLs)" EntitySet="DocItmXMLsSet" m:HttpMethod="GET" sap:action-for="ZBMMM0009_SRV.RelIndust">
+                    <Parameter Name="Docnum" Type="Edm.String" Mode="In" MaxLength="10"/>
+                    <Parameter Name="Itmnum" Type="Edm.String" Mode="In" MaxLength="6"/>
+                </FunctionImport>
+                <FunctionImport Name="EnviarIndust" ReturnType="Collection(ZBMMM0009_SRV.ItensIndust)" EntitySet="ItensIndustSet" m:HttpMethod="POST" sap:action-for="ZBMMM0009_SRV.ItensIndust"/>
+                <FunctionImport Name="CancelaNf" ReturnType="ZBMMM0009_SRV.returnMsg" EntitySet="returnMsgSet" m:HttpMethod="POST" sap:action-for="ZBMMM0009_SRV.RelIndust">
+                    <Parameter Name="Docnum" Type="Edm.String" Mode="In" MaxLength="10"/>
+                </FunctionImport>
+                <FunctionImport Name="DownloadDanfe" ReturnType="Collection(ZBMMM0009_SRV.FileDanfe)" EntitySet="FileDanfeSet" m:HttpMethod="GET" sap:action-for="ZBMMM0009_SRV.RelIndust">
+                    <Parameter Name="Docnum" Type="Edm.String" Mode="In" MaxLength="10"/>
+                </FunctionImport>
+            </EntityContainer>
+            <Annotations Target="ZBMMM0009_SRV.RelIndust/Werks" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+                    <Record Type="com.sap.vocabularies.Common.v1.ValueListType">
+                        <PropertyValue Property="Label" String="Centro"/>
+                        <PropertyValue Property="CollectionPath" String="ShPlantSet"/>
+                        <PropertyValue Property="CollectionRoot" String=""/>
+                        <PropertyValue Property="SearchSupported" Bool="false"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+                                    <PropertyValue Property="ValueListProperty" String="Plant"/>
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Werks"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Name1"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="City"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Region"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <atom:link rel="self" href="http://localhost:8080/webidedispatcher/destinations/MB1/sap/opu/odata/sap/ZBMMM0009_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://localhost:8080/webidedispatcher/destinations/MB1/sap/opu/odata/sap/ZBMMM0009_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,4 @@
+<core:FragmentDefinition xmlns="sap.ui.comp.valuehelpdialog"
+  xmlns:core="sap.ui.core">
+  <ValueHelpDialog title="Selecionar depósito" ok=".onVhDepositoOk" cancel=".onVhDepositoCancel" afterClose=".onVhDepositoAfterClose" supportMultiselect="false" key="Lgort" descriptionKey="Lgort"/>
+</core:FragmentDefinition>

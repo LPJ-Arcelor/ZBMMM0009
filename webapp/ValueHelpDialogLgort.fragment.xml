@@ -1,0 +1,15 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog
+		id="selectDialogLgort"
+		title="Depósitos"
+		items="{/ShMatnrLgortSet}"
+		search=".onValueHelpSearchLgort"
+		confirm=".onValueHelpCloseLgort"
+		cancel=".onValueHelpCloseLgort">
+		<StandardListItem
+			icon=""
+			iconDensityAware="false"
+			iconInset="false"
+			title="{Lgort}" />
+	</SelectDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,100 @@
+<mvc:View xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.f"
+	xmlns:t="sap.ui.table"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:sv="sap.ui.comp.smartvariants" controllerName="br.com.arcelor.zbmmm0009.controller.Worklist">
+
+	<f:DynamicPage id="DynamicPage" headerExpanded="true" class="sapUiNoContentPadding" fitContent="true" showFooter="true">
+
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="{i18n>title}"/>
+				</f:heading>
+				<f:content>
+				</f:content>
+			</f:DynamicPageTitle>
+		</f:title>
+
+		<!-- DynamicPage Header -->
+		<f:header>
+			<f:DynamicPageHeader pinnable="true">
+				<f:content>
+					<VBox fitContainer="true">
+
+						<smartFilterBar:SmartFilterBar id="smartFilterBar" entitySet="RelIndustSet" persistencyKey="SmartFilter_zbmmm0009" considerSelectionVariants="true">
+
+							<smartFilterBar:controlConfiguration>
+								<smartFilterBar:ControlConfiguration key="Werks" index="1" visibleInAdvancedArea="true" filterType="single" mandatory="mandatory" hasValueHelpDialog="true" preventInitialDataFetchInValueHelpDialog="false">
+								</smartFilterBar:ControlConfiguration>
+								<smartFilterBar:ControlConfiguration key="Docdat" index="2" visibleInAdvancedArea="true" mandatory="mandatory" conditionType="sap.ui.comp.config.condition.DateRangeType" label="Data Nota Fiscal">
+								</smartFilterBar:ControlConfiguration>
+								<smartFilterBar:ControlConfiguration key="Nfenum" index="3" visibleInAdvancedArea="true" label="Num Nota Fiscal">
+								</smartFilterBar:ControlConfiguration>
+								<smartFilterBar:ControlConfiguration key="Ebeln" index="4" visibleInAdvancedArea="true" label="Pedido">
+								</smartFilterBar:ControlConfiguration>
+								<smartFilterBar:ControlConfiguration key="Parid" index="5" visibleInAdvancedArea="true" label="Fornecedor">
+								</smartFilterBar:ControlConfiguration>
+								<smartFilterBar:ControlConfiguration key="Matnr" index="6" visibleInAdvancedArea="true" label="Material">
+								</smartFilterBar:ControlConfiguration>
+								<smartFilterBar:ControlConfiguration key="Charg" index="7" visibleInAdvancedArea="true" label="Lote">
+								</smartFilterBar:ControlConfiguration>
+								<smartFilterBar:ControlConfiguration key="Cancel" index="8" visibleInAdvancedArea="true" label="NF cancelada">
+								</smartFilterBar:ControlConfiguration>
+								<smartFilterBar:ControlConfiguration key="Usuario" index="9" visibleInAdvancedArea="true" label="Usuário">
+								</smartFilterBar:ControlConfiguration>
+							</smartFilterBar:controlConfiguration>
+
+							<!-- layout data used to make the table growing but the filter bar fixed -->
+							<smartFilterBar:layoutData>
+								<FlexItemData shrinkFactor="0"/>
+							</smartFilterBar:layoutData>
+
+						</smartFilterBar:SmartFilterBar>
+
+					</VBox>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+
+		<!-- DynamicPage Content -->
+		<f:content>
+
+			<smartTable:SmartTable id="smartTable" entitySet="RelIndustSet" smartFilterId="smartFilterBar" tableType="Table" useExportToExcel="true" useVariantManagement="true" useTablePersonalisation="true" header="{i18n>stHeader}" showRowCount="true" persistencyKey="smartTable_zbmmm0009" showFullScreenButton="true" beforeRebindTable="onDataReceived" 
+				initiallyVisibleFields="CancelDesc,Docdat,Nfenum,Itmnum,Ebeln,Parid,Name,Bwart,Matnr,Maktx,Serie,Nitemped,
+					Branch,Refkey,DocdatAno,Cfop,Lgort,Charg,Menge,Meins,Usuario" requestAtLeastFields="Cancel,Docnum,IsNfOk">
+				<smartTable:customToolbar>
+					<OverflowToolbar design="Transparent">
+						<ToolbarSpacer/>
+						<Button id="btnEnviar" text="{i18n>btnEnviar}" icon="sap-icon://add-document" tooltip="" press="onEnvairIndust" visible="true"/>
+						<Button id="btnCancelar" text="{i18n>btnCancelar}" icon="sap-icon://reset" tooltip="" press="onCancel" visible="true"/>
+						<Button id="btnXML" text="{i18n>btnXML}" icon="sap-icon://download" tooltip="" press="onDowXML" visible="true"/>
+						<Button id="btnDanfe" text="{i18n>btnDanfe}" icon="sap-icon://download" tooltip="" press="onDowDanfe" visible="true"/>
+					</OverflowToolbar>
+				</smartTable:customToolbar>
+
+				<smartTable:layoutData>
+					<FlexItemData growFactor="1" baseSize="0%"/>
+				</smartTable:layoutData>
+
+				<t:Table selectionMode="MultiToggle" visibleRowCountMode="Auto">
+					<t:Column id="Docnum" width="9rem" sortProperty="Docnum">
+						<Label text="{i18n>lblDocNum}"/>
+						<t:customData>
+							<core:CustomData key="p13nData" value='\{"columnKey": "Docnum", "leadingProperty":"Docnum", "sortProperty": "Docnum", "filterProperty": "Docnum", "type":"numeric", "columnIndex": 1}' />
+						</t:customData>
+						<t:template>
+							<Link text="{Docnum}" press="onNavToNf"/>
+						</t:template>
+					</t:Column>
+				</t:Table>
+
+			</smartTable:SmartTable>
+
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

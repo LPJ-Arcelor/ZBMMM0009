@@ -1,0 +1,1 @@
+sap.ui.define(["sap/ui/test/Opa5","./arrangements/Startup","./WorklistJourney","./NavigationJourney","./NotFoundJourney","./ObjectJourney"],function(e,t){"use strict";e.extendConfig({arrangements:new t,viewNamespace:"br.com.arcelor.zbmmm0009.view.",autoWait:true})});

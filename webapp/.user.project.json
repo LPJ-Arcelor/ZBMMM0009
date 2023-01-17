@@ -1,0 +1,39 @@
+{
+  "run": [
+    {
+      "filePath": "/test.html",
+      "previewMode": 1,
+      "dataMode": 1,
+      "ui5ActiveVersion": null,
+      "ui5VerSource": null,
+      "isDefaultVersion": 0,
+      "workspace": "withoutWorkspace",
+      "urlParameters": [],
+      "backendSystem": [],
+      "_metadata": {
+        "runnerId": "qunitrunner",
+        "id": 4425280,
+        "displayName": "Run test.html",
+        "lastRunTimeStamp": 1666988254702
+      }
+    },
+    {
+      "filePath": "/index.html",
+      "previewMode": 1,
+      "dataMode": 1,
+      "workspace": "withoutWorkspace",
+      "ui5ActiveVersion": null,
+      "ui5VerSource": null,
+      "isDefaultVersion": 0,
+      "urlParameters": [],
+      "hashParameter": "",
+      "backendSystem": [],
+      "_metadata": {
+        "runnerId": "webapprunner",
+        "id": 3583222,
+        "displayName": "Run index.html",
+        "lastRunTimeStamp": 1666988233601
+      }
+    }
+  ]
+}
